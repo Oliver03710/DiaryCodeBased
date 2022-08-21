@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 class SelectView: BaseView {
@@ -38,6 +39,8 @@ class SelectView: BaseView {
 
     }()
     
+    var selectedImage: UIImage?
+    
     
     // MARK: - Init
     
@@ -55,6 +58,7 @@ class SelectView: BaseView {
     
     override func configureUI() {
         
+        configureSearchBar()
         configureCollectionView()
         [searchBar, collectionView].forEach { self.addSubview($0) }
         
@@ -81,6 +85,10 @@ class SelectView: BaseView {
         collectionView.dataSource = self
         collectionView.register(ImagesCollectionViewCell.self, forCellWithReuseIdentifier: ImagesCollectionViewCell.reuseIdentifier)
     }
+    
+    func configureSearchBar() {
+        searchBar.delegate = self
+    }
 
 }
 
@@ -90,6 +98,33 @@ class SelectView: BaseView {
 extension SelectView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
+        cell.layer.borderWidth = 3
+        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+        selectedImage = cell.imageView.image
+        
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
+        cell.layer.borderWidth = 0
+        cell.layer.borderColor = nil
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
+        cell.contentView.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
+        cell.contentView.backgroundColor = nil
         
     }
     
@@ -101,16 +136,40 @@ extension SelectView: UICollectionViewDelegate {
 extension SelectView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return ImageData.imageData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesCollectionViewCell.reuseIdentifier, for: indexPath) as? ImagesCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.imageView.image = UIImage(systemName: "applelogo")
-        
+        cell.imageView.kf.setImage(with: URL(string: ImageData.imageData[indexPath.item]))
+
         return cell
+    }
+    
+}
+
+
+// MARK: - Extension: UISearchBarDelegate
+
+extension SelectView: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        ImageData.imageData.removeAll()
+        guard let text = searchBar.text else { return }
+        if !text.isEmpty, text.count > 0 {
+            FetchImageManager.shared.fetchImages(query: text) { urlArr in
+                ImageData.imageData.append(contentsOf: urlArr)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    
+                }
+                
+            }
+        }
+        
     }
     
 }

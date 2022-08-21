@@ -32,13 +32,11 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     // MARK: - Helper Functions
     
     func setUI() {
-        imageView.image = UIImage(systemName: "applelogo")
-        imageView.backgroundColor = .red
         [imageView].forEach { self.addSubview($0) }
     }
     
     func setConstraints() {
-        imageView.snp.makeConstraints { $0.top.leading.trailing.bottom.equalTo(0) }
+        imageView.snp.makeConstraints { $0.top.trailing.leading.bottom.equalTo(self) }
     }
     
 }

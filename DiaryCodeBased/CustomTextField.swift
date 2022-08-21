@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlackRadiusTextField: UITextField {
+class CustomTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,11 +24,12 @@ class BlackRadiusTextField: UITextField {
         layer.cornerRadius = 8
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
+        textColor = .red
     }
     
     convenience init(palceHolder: String) {
         self.init()
-        self.placeholder = placeholder
+        self.attributedPlaceholder = NSAttributedString(string: palceHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray2])
     }
 
 }

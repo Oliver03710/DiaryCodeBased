@@ -17,14 +17,14 @@ class DiaryView: BaseView {
         return view
     }()
     
-    let titleTextField: BlackRadiusTextField = {
-        let view = BlackRadiusTextField(palceHolder: "제목을 입력해주세요")
-        return view
+    let titleTextField: CustomTextField = {
+        let tf = CustomTextField(palceHolder: "제목을 입력해주세요")
+        return tf
     }()
     
-    let dataTextField: BlackRadiusTextField = {
-        let view = BlackRadiusTextField(palceHolder: "날짜를 입력해주세요")
-        return view
+    let dataTextField: CustomTextField = {
+        let tf = CustomTextField(palceHolder: "날짜를 입력해주세요")
+        return tf
     }()
     
     let contentTextView: CustomTextView = {
@@ -42,7 +42,7 @@ class DiaryView: BaseView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
     // MARK: - Helper Functions
     

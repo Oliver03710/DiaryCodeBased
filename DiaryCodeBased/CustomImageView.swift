@@ -21,6 +21,7 @@ class CustomImageView: UIImageView {
     
     override func layoutSubviews() {
         self.backgroundColor = .lightGray
+        self.layer.masksToBounds = true
     }
     
     convenience init(frame: CGRect, contentMode: UIView.ContentMode) {

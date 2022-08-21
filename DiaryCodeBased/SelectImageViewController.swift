@@ -7,12 +7,18 @@
 
 import UIKit
 
+import Kingfisher
+
+protocol TransferImageDelegate {
+    func transferringImage(image: UIImage)
+}
+
 class SelectImageViewController: BaseViewController {
 
     // MARK: - Properties
     
     var selectView = SelectView()
-
+    var delegate: TransferImageDelegate?
     
     // MARK: - Init
     
@@ -29,10 +35,14 @@ class SelectImageViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func selectImages() {
+        guard let image = selectView.selectedImage else { return }
+        delegate?.transferringImage(image: image)
+        print(image)
         self.dismiss(animated: true)
     }
     
     @objc func goBack() {
+        ImageData.imageData.removeAll()
         self.dismiss(animated: true)
     }
     

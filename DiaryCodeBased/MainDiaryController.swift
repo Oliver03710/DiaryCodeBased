@@ -33,10 +33,7 @@ class MainDiaryController: BaseViewController {
     // MARK: - Selectors
     
     @objc func imageViewTapped() {
-        
-        print("Yaho")
         self.transitionViewController(viewController: SelectImageViewController.self)
-        
     }
     
     
@@ -48,5 +45,22 @@ class MainDiaryController: BaseViewController {
         let tapping = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
         diaryView.photoImageView.addGestureRecognizer(tapping)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as! SelectImageViewController
+        destVC.delegate = self
+    }
+    
+}
 
+
+// MARK: - Extension: TransferImageDelegate
+
+extension MainDiaryController: TransferImageDelegate {
+    
+    func transferringImage(image: UIImage) {
+        diaryView.photoImageView.image = image
+        print(image)
+    }
+    
 }
