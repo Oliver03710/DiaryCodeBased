@@ -12,29 +12,23 @@ class DiaryView: BaseView {
 
     // MARK: - Properties
     
-    let photoImageView: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = .lightGray
-        view.contentMode = .scaleAspectFill
+    let photoImageView: CustomImageView = {
+        let view = CustomImageView(frame: .zero, contentMode: .scaleAspectFill)
         return view
     }()
     
     let titleTextField: BlackRadiusTextField = {
-        let view = BlackRadiusTextField()
-        view.placeholder = "제목을 입력해주세요"
+        let view = BlackRadiusTextField(palceHolder: "제목을 입력해주세요")
         return view
     }()
     
     let dataTextField: BlackRadiusTextField = {
-        let view = BlackRadiusTextField()
-        view.placeholder = "제목을 입력해주세요"
+        let view = BlackRadiusTextField(palceHolder: "날짜를 입력해주세요")
         return view
     }()
     
-    let contentTextView: UITextView = {
-        let view = UITextView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.black.cgColor
+    let contentTextView: CustomTextView = {
+        let view = CustomTextView(borderColor: UIColor.black.cgColor)
         return view
     }()
     

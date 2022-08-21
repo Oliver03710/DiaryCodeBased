@@ -11,14 +11,13 @@ class BlackRadiusTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    func setupView() {
+    override func layoutSubviews() {
         backgroundColor = .clear
         textAlignment = .center
         borderStyle = .none
@@ -26,4 +25,10 @@ class BlackRadiusTextField: UITextField {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
     }
+    
+    convenience init(palceHolder: String) {
+        self.init()
+        self.placeholder = placeholder
+    }
+
 }

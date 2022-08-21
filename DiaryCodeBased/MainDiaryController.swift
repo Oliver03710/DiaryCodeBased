@@ -26,8 +26,27 @@ class MainDiaryController: BaseViewController {
     }
     
     override func configureUI() {
+        configureGestureRecognizers()
+    }
+    
+    
+    // MARK: - Selectors
+    
+    @objc func imageViewTapped() {
         
+        print("Yaho")
+        self.transitionViewController(viewController: SelectImageViewController.self)
+        
+    }
+    
+    
+    // MARK: - Helper Functions
+    
+    func configureGestureRecognizers() {
+        
+        diaryView.photoImageView.isUserInteractionEnabled = true
+        let tapping = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        diaryView.photoImageView.addGestureRecognizer(tapping)
     }
 
 }
-
