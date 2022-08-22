@@ -9,12 +9,16 @@ import UIKit
 
 import Kingfisher
 
+protocol TransferImageDelegate {
+    func transferringImage(image: UIImage)
+}
+
 class SelectImageViewController: BaseViewController {
 
     // MARK: - Properties
     
     var selectView = SelectView()
-    
+    var delegate: TransferImageDelegate?
     
     // MARK: - Init
     
@@ -31,7 +35,8 @@ class SelectImageViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func selectImages() {
-        selectView.delegate = self
+        guard let image = selectView.selectedImage else { return }
+        delegate?.transferringImage(image: image)
         self.dismiss(animated: true)
     }
     
@@ -53,16 +58,4 @@ class SelectImageViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
     }
 
-}
-
-
-extension SelectImageViewController: TransferImageDelegate {
-    
-    func transferringImage(image: UIImage) {
-        let vc = MainDiaryController()
-        vc.diaryView.photoImageView.image = image
-        present(vc, animated: true)
-    }
-    
-    
 }

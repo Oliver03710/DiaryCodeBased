@@ -10,13 +10,11 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-protocol TransferImageDelegate {
-    func transferringImage(image: UIImage)
-}
-
 class SelectView: BaseView {
 
     // MARK: - Properties
+    
+    var selectedImage: UIImage?
     
     let searchBar: UISearchBar = {
         let sb = UISearchBar()
@@ -42,8 +40,6 @@ class SelectView: BaseView {
         return cv
 
     }()
-    
-    var delegate: TransferImageDelegate?
     
     
     // MARK: - Init
@@ -106,8 +102,6 @@ extension SelectView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
         cell.layer.borderWidth = 3
         cell.layer.borderColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
-        guard let image = cell.imageView.image else { return }
-        delegate?.transferringImage(image: image)
         
     }
 

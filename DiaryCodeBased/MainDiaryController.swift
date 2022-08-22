@@ -38,7 +38,11 @@ class MainDiaryController: BaseViewController {
     // MARK: - Selectors
     
     @objc func imageViewTapped() {
-        self.transitionViewController(viewController: SelectImageViewController.self)
+        
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: SelectImageViewController.reuseIdentifier) as? SelectImageViewController else { return }
+        vc.delegate = self
+        self.present(vc, animated: true)
+//        self.transitionViewController(viewController: SelectImageViewController.self)
     }
     
     @objc func writeButtonClicked() {
@@ -64,4 +68,13 @@ class MainDiaryController: BaseViewController {
         diaryView.photoImageView.addGestureRecognizer(tapping)
     }
     
+}
+
+
+extension MainDiaryController: TransferImageDelegate {
+
+    func transferringImage(image: UIImage) {
+        diaryView.photoImageView.image = image
+    }
+        
 }
