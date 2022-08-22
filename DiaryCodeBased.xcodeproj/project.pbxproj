@@ -35,6 +35,10 @@
 		AD4284BD28B1556400EC36E4 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4284BC28B1556400EC36E4 /* DiaryView.swift */; };
 		AD4284C028B155FE00EC36E4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AD4284BF28B155FE00EC36E4 /* SnapKit */; };
 		AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4284C228B156C800EC36E4 /* CustomTextField.swift */; };
+		AD5299A128B3164300761A3A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AD5299A028B3164300761A3A /* Realm */; };
+		AD5299A328B3164300761A3A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5299A228B3164300761A3A /* RealmSwift */; };
+		AD5299A628B319E800761A3A /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A528B319E800761A3A /* RealmModel.swift */; };
+		AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A828B32AB500761A3A /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,8 @@
 		AD4284BA28B154E800EC36E4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		AD4284BC28B1556400EC36E4 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		AD4284C228B156C800EC36E4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		AD5299A528B319E800761A3A /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		AD5299A828B32AB500761A3A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +77,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD5299A328B3164300761A3A /* RealmSwift in Frameworks */,
 				AD3BFA6D28B235DF00381E8E /* Kingfisher in Frameworks */,
 				AD3BFA6A28B235CE00381E8E /* SwiftyJSON in Frameworks */,
 				AD4284C028B155FE00EC36E4 /* SnapKit in Frameworks */,
 				AD3BFA6728B235C200381E8E /* Alamofire in Frameworks */,
+				AD5299A128B3164300761A3A /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +130,8 @@
 			children = (
 				AD4284A228B1543600EC36E4 /* AppDelegate.swift */,
 				AD4284A428B1543600EC36E4 /* SceneDelegate.swift */,
+				AD5299A728B32AA000761A3A /* Home */,
+				AD5299A428B319D700761A3A /* Realm */,
 				AD3BFA5928B2198900381E8E /* Protocols */,
 				AD3BFA4428B2000800381E8E /* Networking */,
 				AD4284B628B1548000EC36E4 /* Utility */,
@@ -161,6 +171,22 @@
 			name = Custom;
 			sourceTree = "<group>";
 		};
+		AD5299A428B319D700761A3A /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				AD5299A528B319E800761A3A /* RealmModel.swift */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
+		AD5299A728B32AA000761A3A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AD5299A828B32AB500761A3A /* HomeViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,6 +208,8 @@
 				AD3BFA6628B235C200381E8E /* Alamofire */,
 				AD3BFA6928B235CE00381E8E /* SwiftyJSON */,
 				AD3BFA6C28B235DF00381E8E /* Kingfisher */,
+				AD5299A028B3164300761A3A /* Realm */,
+				AD5299A228B3164300761A3A /* RealmSwift */,
 			);
 			productName = DiaryCodeBased;
 			productReference = AD42849F28B1543600EC36E4 /* DiaryCodeBased.app */;
@@ -216,6 +244,7 @@
 				AD3BFA6528B235C200381E8E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AD3BFA6828B235CE00381E8E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				AD3BFA6B28B235DF00381E8E /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = AD4284A028B1543600EC36E4 /* Products */;
 			projectDirPath = "";
@@ -246,11 +275,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD3BFA6028B234D100381E8E /* ImageData.swift in Sources */,
+				AD5299A628B319E800761A3A /* RealmModel.swift in Sources */,
 				AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */,
 				AD3BFA4028B1F8C200381E8E /* CustomImageView.swift in Sources */,
 				AD3BFA3E28B1F83B00381E8E /* CustomView.swift in Sources */,
 				AD4284A728B1543600EC36E4 /* MainDiaryController.swift in Sources */,
 				AD4284B928B154AE00EC36E4 /* BaseViewController.swift in Sources */,
+				AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */,
 				AD4284BD28B1556400EC36E4 /* DiaryView.swift in Sources */,
 				AD3BFA5728B2191300381E8E /* ImagesCollectionViewCell.swift in Sources */,
 				AD3BFA4228B1FA5800381E8E /* CustomTextView.swift in Sources */,
@@ -518,6 +549,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -540,6 +579,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD4284BE28B155FE00EC36E4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		AD5299A028B3164300761A3A /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		AD5299A228B3164300761A3A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

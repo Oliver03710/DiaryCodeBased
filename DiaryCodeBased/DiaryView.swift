@@ -32,6 +32,13 @@ class DiaryView: BaseView {
         return view
     }()
     
+    let writeButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red
+        btn.tintColor = .green
+        return btn
+    }()
+    
     
     // MARK: - Init
     
@@ -48,6 +55,7 @@ class DiaryView: BaseView {
     
     override func configureUI() {
         [photoImageView, titleTextField, dataTextField, contentTextView].forEach { self.addSubview($0) }
+        [writeButton].forEach { photoImageView.addSubview($0) }
     }
     
     override func setConstraints() {
@@ -78,6 +86,11 @@ class DiaryView: BaseView {
             make.leadingMargin.equalTo(20)
             make.trailingMargin.equalTo(-20)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        writeButton.snp.makeConstraints { make in
+            make.top.equalTo(photoImageView.snp.top)
+            make.trailing.equalTo(photoImageView.snp.trailing)
         }
         
     }
