@@ -35,8 +35,10 @@ class SelectImageViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func selectImages() {
-        guard let image = selectView.selectedImage else { return }
-        delegate?.transferringImage(image: image)
+        if let image = selectView.selectedImage {
+            delegate?.transferringImage(image: image)
+            print(image)
+        }
         self.dismiss(animated: true)
     }
     

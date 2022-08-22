@@ -39,9 +39,11 @@ class MainDiaryController: BaseViewController {
     
     @objc func imageViewTapped() {
         
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: SelectImageViewController.reuseIdentifier) as? SelectImageViewController else { return }
+        let vc = SelectImageViewController()
         vc.delegate = self
-        self.present(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
 //        self.transitionViewController(viewController: SelectImageViewController.self)
     }
     

@@ -102,6 +102,7 @@ extension SelectView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
         cell.layer.borderWidth = 3
         cell.layer.borderColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+        selectedImage = cell.imageView.image
         
     }
 
