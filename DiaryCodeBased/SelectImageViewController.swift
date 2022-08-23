@@ -11,6 +11,7 @@ import Kingfisher
 
 protocol TransferImageDelegate {
     func transferringImage(image: UIImage)
+    func transferringPHPickerImage(image: UIImage?)
 }
 
 class SelectImageViewController: BaseViewController {
@@ -35,16 +36,24 @@ class SelectImageViewController: BaseViewController {
     // MARK: - Selectors
     
     @objc func selectImages() {
-        if let image = selectView.selectedImage {
+        guard let image = selectView.selectedImage else {
+            delegate?.transferringPHPickerImage(image: selectView.phPickerImageView.image)
+            selectView.phPickerImageView.isHidden = true
+            self.navigationController?.popViewController(animated: true)
+            selectView.phPickerImageView.image = nil
+            return
+        }
             delegate?.transferringImage(image: image)
             print(image)
-        }
-        self.dismiss(animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
+        ImageData.imageData.removeAll()
     }
     
-    @objc func goBack() {
+    @objc func goPhotoLibrary() {
+        selectView.collectionView.isHidden = true
         ImageData.imageData.removeAll()
-        self.dismiss(animated: true)
+        present(selectView.phPicker, animated: true)
     }
     
     
@@ -56,8 +65,9 @@ class SelectImageViewController: BaseViewController {
     
     func configureNavi() {
         self.showNaviBars(naviTitle: nil, naviBarTintColor: .systemGreen)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectImages))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
+        let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectImages))
+        let phPicker = UIBarButtonItem(title: "사진첩", style: .plain, target: self, action: #selector(goPhotoLibrary))
+        self.navigationItem.rightBarButtonItems = [selectButton, phPicker]
     }
 
 }

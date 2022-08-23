@@ -17,13 +17,10 @@ class CustomView: BaseView {
         super.init(coder: coder)
     }
     
-    override func layoutSubviews() {
-        self.layer.borderWidth = 1
-    }
-    
     convenience init(borderColor: CGColor) {
         self.init()
         self.layer.borderColor = borderColor
+        self.layer.borderWidth = 1
     }
 
 }

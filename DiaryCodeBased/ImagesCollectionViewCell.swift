@@ -10,6 +10,8 @@ import SnapKit
 
 class ImagesCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     let imageView: CustomImageView = {
         let iv = CustomImageView(frame: .zero, contentMode: .scaleAspectFill)
         return iv

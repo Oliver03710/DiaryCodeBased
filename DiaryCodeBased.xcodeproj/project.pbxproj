@@ -13,8 +13,6 @@
 		AD3BFA4628B2002100381E8E /* FetchImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA4528B2002100381E8E /* FetchImages.swift */; };
 		AD3BFA4828B200BA00381E8E /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA4728B200BA00381E8E /* SelectImageViewController.swift */; };
 		AD3BFA4A28B200DE00381E8E /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA4928B200DE00381E8E /* SelectView.swift */; };
-		AD3BFA4E28B2060100381E8E /* TransitionViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA4D28B2060100381E8E /* TransitionViewControllers.swift */; };
-		AD3BFA5428B20ADB00381E8E /* CustomNavigationBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA5328B20ADB00381E8E /* CustomNavigationBars.swift */; };
 		AD3BFA5728B2191300381E8E /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA5628B2191300381E8E /* ImagesCollectionViewCell.swift */; };
 		AD3BFA5B28B2199D00381E8E /* ReusableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA5A28B2199D00381E8E /* ReusableProtocols.swift */; };
 		AD3BFA5E28B234C900381E8E /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3BFA5D28B234C900381E8E /* Endpoints.swift */; };
@@ -35,10 +33,16 @@
 		AD4284BD28B1556400EC36E4 /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4284BC28B1556400EC36E4 /* DiaryView.swift */; };
 		AD4284C028B155FE00EC36E4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AD4284BF28B155FE00EC36E4 /* SnapKit */; };
 		AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4284C228B156C800EC36E4 /* CustomTextField.swift */; };
+		AD52298628B4E32400811043 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD52298528B4E32400811043 /* UIViewController+Extension.swift */; };
 		AD5299A128B3164300761A3A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AD5299A028B3164300761A3A /* Realm */; };
 		AD5299A328B3164300761A3A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5299A228B3164300761A3A /* RealmSwift */; };
 		AD5299A628B319E800761A3A /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A528B319E800761A3A /* RealmModel.swift */; };
 		AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A828B32AB500761A3A /* HomeViewController.swift */; };
+		AD89567028B527AA00454132 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89566F28B527AA00454132 /* String+Extension.swift */; };
+		AD89567228B52BA400454132 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567128B52BA400454132 /* UIImage+Extension.swift */; };
+		AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567328B52D1F00454132 /* HomeTableViewCell.swift */; };
+		AD89567628B52EF100454132 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567528B52EF100454132 /* CustomLabel.swift */; };
+		AD89567828B5346E00454132 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567728B5346E00454132 /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +52,6 @@
 		AD3BFA4528B2002100381E8E /* FetchImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImages.swift; sourceTree = "<group>"; };
 		AD3BFA4728B200BA00381E8E /* SelectImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
 		AD3BFA4928B200DE00381E8E /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
-		AD3BFA4D28B2060100381E8E /* TransitionViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionViewControllers.swift; sourceTree = "<group>"; };
-		AD3BFA5328B20ADB00381E8E /* CustomNavigationBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBars.swift; sourceTree = "<group>"; };
 		AD3BFA5628B2191300381E8E /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		AD3BFA5A28B2199D00381E8E /* ReusableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocols.swift; sourceTree = "<group>"; };
 		AD3BFA5D28B234C900381E8E /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
@@ -68,8 +70,14 @@
 		AD4284BA28B154E800EC36E4 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		AD4284BC28B1556400EC36E4 /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		AD4284C228B156C800EC36E4 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		AD52298528B4E32400811043 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		AD5299A528B319E800761A3A /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		AD5299A828B32AB500761A3A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AD89566F28B527AA00454132 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		AD89567128B52BA400454132 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		AD89567328B52D1F00454132 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		AD89567528B52EF100454132 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		AD89567728B5346E00454132 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +138,7 @@
 			children = (
 				AD4284A228B1543600EC36E4 /* AppDelegate.swift */,
 				AD4284A428B1543600EC36E4 /* SceneDelegate.swift */,
+				AD52298428B4E31100811043 /* Extensions */,
 				AD5299A728B32AA000761A3A /* Home */,
 				AD5299A428B319D700761A3A /* Realm */,
 				AD3BFA5928B2198900381E8E /* Protocols */,
@@ -152,8 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				AD4284B728B1548E00EC36E4 /* Custom */,
-				AD3BFA4D28B2060100381E8E /* TransitionViewControllers.swift */,
-				AD3BFA5328B20ADB00381E8E /* CustomNavigationBars.swift */,
 				AD4284B828B154AE00EC36E4 /* BaseViewController.swift */,
 				AD4284BA28B154E800EC36E4 /* BaseView.swift */,
 			);
@@ -167,8 +174,20 @@
 				AD3BFA3D28B1F83B00381E8E /* CustomView.swift */,
 				AD3BFA3F28B1F8C200381E8E /* CustomImageView.swift */,
 				AD3BFA4128B1FA5800381E8E /* CustomTextView.swift */,
+				AD89567528B52EF100454132 /* CustomLabel.swift */,
 			);
 			name = Custom;
+			sourceTree = "<group>";
+		};
+		AD52298428B4E31100811043 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD52298528B4E32400811043 /* UIViewController+Extension.swift */,
+				AD89566F28B527AA00454132 /* String+Extension.swift */,
+				AD89567128B52BA400454132 /* UIImage+Extension.swift */,
+				AD89567728B5346E00454132 /* Date+Extension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		AD5299A428B319D700761A3A /* Realm */ = {
@@ -183,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				AD5299A828B32AB500761A3A /* HomeViewController.swift */,
+				AD89567328B52D1F00454132 /* HomeTableViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -275,23 +295,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD3BFA6028B234D100381E8E /* ImageData.swift in Sources */,
+				AD89567628B52EF100454132 /* CustomLabel.swift in Sources */,
 				AD5299A628B319E800761A3A /* RealmModel.swift in Sources */,
 				AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */,
 				AD3BFA4028B1F8C200381E8E /* CustomImageView.swift in Sources */,
 				AD3BFA3E28B1F83B00381E8E /* CustomView.swift in Sources */,
 				AD4284A728B1543600EC36E4 /* MainDiaryController.swift in Sources */,
+				AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */,
 				AD4284B928B154AE00EC36E4 /* BaseViewController.swift in Sources */,
+				AD52298628B4E32400811043 /* UIViewController+Extension.swift in Sources */,
 				AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */,
+				AD89567228B52BA400454132 /* UIImage+Extension.swift in Sources */,
 				AD4284BD28B1556400EC36E4 /* DiaryView.swift in Sources */,
 				AD3BFA5728B2191300381E8E /* ImagesCollectionViewCell.swift in Sources */,
 				AD3BFA4228B1FA5800381E8E /* CustomTextView.swift in Sources */,
-				AD3BFA5428B20ADB00381E8E /* CustomNavigationBars.swift in Sources */,
+				AD89567828B5346E00454132 /* Date+Extension.swift in Sources */,
+				AD89567028B527AA00454132 /* String+Extension.swift in Sources */,
 				AD3BFA4A28B200DE00381E8E /* SelectView.swift in Sources */,
 				AD4284BB28B154E800EC36E4 /* BaseView.swift in Sources */,
 				AD3BFA4828B200BA00381E8E /* SelectImageViewController.swift in Sources */,
 				AD4284A328B1543600EC36E4 /* AppDelegate.swift in Sources */,
 				AD3BFA6428B234F800381E8E /* APIKey.swift in Sources */,
-				AD3BFA4E28B2060100381E8E /* TransitionViewControllers.swift in Sources */,
 				AD3BFA5B28B2199D00381E8E /* ReusableProtocols.swift in Sources */,
 				AD4284A528B1543600EC36E4 /* SceneDelegate.swift in Sources */,
 				AD3BFA5E28B234C900381E8E /* Endpoints.swift in Sources */,

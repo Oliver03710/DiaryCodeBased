@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 import Kingfisher
 import SnapKit
@@ -14,7 +15,20 @@ class SelectView: BaseView {
 
     // MARK: - Properties
     
+    var imageFromPHPicker: UIImage?
     var selectedImage: UIImage?
+    var itemPrividers: [NSItemProvider] = []
+    var iterator: IndexingIterator<[NSItemProvider]>?
+    
+    lazy var phPicker: PHPickerViewController = {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let phPicker = PHPickerViewController(configuration: configuration)
+        phPicker.delegate = self
+        return phPicker
+    }()
     
     let searchBar: UISearchBar = {
         let sb = UISearchBar()
@@ -41,6 +55,12 @@ class SelectView: BaseView {
 
     }()
     
+    let phPickerImageView: CustomImageView = {
+        let iv = CustomImageView(frame: .zero, contentMode: .scaleAspectFill)
+        iv.isHidden = true
+        return iv
+    }()
+    
     
     // MARK: - Init
     
@@ -57,10 +77,9 @@ class SelectView: BaseView {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        
         configureSearchBar()
         configureCollectionView()
-        [searchBar, collectionView].forEach { self.addSubview($0) }
+        [searchBar, collectionView, phPickerImageView].forEach { self.addSubview($0) }
         
     }
     
@@ -76,6 +95,14 @@ class SelectView: BaseView {
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        phPickerImageView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalTo(UIScreen.main.bounds.width / 1.1)
+            make.height.equalTo(phPickerImageView.snp.width).multipliedBy(1)
+            
         }
         
     }
@@ -156,7 +183,11 @@ extension SelectView: UICollectionViewDataSource {
 extension SelectView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+        self.phPickerImageView.image = nil
+        self.phPickerImageView.isHidden = true
+        if collectionView.isHidden {
+            collectionView.isHidden = false
+        }
         ImageData.imageData.removeAll()
         guard let text = searchBar.text else { return }
         if !text.isEmpty, text.count > 0 {
@@ -168,6 +199,39 @@ extension SelectView: UISearchBarDelegate {
                 }
                 
             }
+        }
+        
+    }
+    
+}
+
+
+// MARK: - Extension: PHPickerViewControllerDelegate
+
+extension SelectView: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        phPicker.dismiss(animated: true)
+        
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider,
+           
+            itemProvider.canLoadObject(ofClass: UIImage.self) {
+            
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                
+                DispatchQueue.main.async {
+                    self.phPickerImageView.image = image as? UIImage
+                    self.phPickerImageView.isHidden = false
+                }
+                
+            }
+            
+        } else {
+            print("Error from Picking Photos")
+            self.phPickerImageView.image = nil
+            phPickerImageView.isHidden = true
         }
         
     }

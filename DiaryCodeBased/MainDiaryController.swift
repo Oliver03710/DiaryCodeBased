@@ -29,9 +29,9 @@ class MainDiaryController: BaseViewController {
     }
     
     override func configureUI() {
-        diaryView.writeButton.addTarget(self, action: #selector(writeButtonClicked), for: .touchUpInside)
         configureGestureRecognizers()
-        
+        showNaviBars(naviTitle: "MY DIARY", naviBarTintColor: .systemGreen)
+        configureNaviButtons()
     }
     
     
@@ -41,16 +41,18 @@ class MainDiaryController: BaseViewController {
         
         let vc = SelectImageViewController()
         vc.delegate = self
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        self.present(nav, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
 //        self.transitionViewController(viewController: SelectImageViewController.self)
     }
     
-    @objc func writeButtonClicked() {
+    @objc func saveButtonClicked() {
         
         // Record 추가
-        let task = UserDiary(diaryTitle: "오늘의 일기\(Int.random(in: 1...1000))", contents: "일기 테스트 내용", writingDate: Date(), registerDate: Date(), photos: nil)
+        guard let titleText = diaryView.titleTextField.text else { return }
+        guard let contentText = diaryView.contentTextView.text else { return }
+//        guard let dateText = diaryView.dateTextField.text?.toDate() else { return }
+//        guard let image = diaryView.photoImageView.image?.toPngString() else { return }
+        let task = UserDiary(diaryTitle: titleText, contents: contentText, writingDate: Date(), registerDate: Date(), photos: nil)
         
         try! localRealm.write {
             localRealm.add(task)    // Create
@@ -60,21 +62,45 @@ class MainDiaryController: BaseViewController {
         
     }
     
+    @objc func cancelButtonClicked() {
+        diaryView.photoImageView.image = nil
+        diaryView.titleTextField.text = nil
+        diaryView.dateTextField.text = nil
+        diaryView.contentTextView.text = nil
+    }
+    
+    @objc func presentingList() {
+        let vc = HomeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     // MARK: - Helper Functions
     
     func configureGestureRecognizers() {
-        
         diaryView.photoImageView.isUserInteractionEnabled = true
         let tapping = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
         diaryView.photoImageView.addGestureRecognizer(tapping)
     }
     
+    func configureNaviButtons() {
+        let save = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
+        let list = UIBarButtonItem(title: "목록", style: .plain, target: self, action: #selector(presentingList))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonClicked))
+        navigationItem.rightBarButtonItems = [save, list]
+    }
+    
 }
 
 
-extension MainDiaryController: TransferImageDelegate {
+// MARK: - Extension: TransferImageDelegate
 
+extension MainDiaryController: TransferImageDelegate {
+    
+    func transferringPHPickerImage(image: UIImage?) {
+        diaryView.photoImageView.image = image
+    }
+    
     func transferringImage(image: UIImage) {
         diaryView.photoImageView.image = image
     }

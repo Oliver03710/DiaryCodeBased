@@ -22,21 +22,14 @@ class DiaryView: BaseView {
         return tf
     }()
     
-    let dataTextField: CustomTextField = {
+    let dateTextField: CustomTextField = {
         let tf = CustomTextField(palceHolder: "날짜를 입력해주세요")
         return tf
     }()
     
     let contentTextView: CustomTextView = {
-        let view = CustomTextView(borderColor: UIColor.black.cgColor)
+        let view = CustomTextView(borderColor: UIColor.black.cgColor, frame: .zero)
         return view
-    }()
-    
-    let writeButton: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = .red
-        btn.tintColor = .green
-        return btn
     }()
     
     
@@ -54,14 +47,13 @@ class DiaryView: BaseView {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        [photoImageView, titleTextField, dataTextField, contentTextView].forEach { self.addSubview($0) }
-        [writeButton].forEach { photoImageView.addSubview($0) }
+        [photoImageView, titleTextField, dateTextField, contentTextView].forEach { self.addSubview($0) }
     }
     
     override func setConstraints() {
         
         photoImageView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
             make.leadingMargin.equalTo(20)
             make.trailingMargin.equalTo(-20)
             make.height.equalTo(self).multipliedBy(0.3)
@@ -74,7 +66,7 @@ class DiaryView: BaseView {
             make.height.equalTo(50)
         }
         
-        dataTextField.snp.makeConstraints { make in
+        dateTextField.snp.makeConstraints { make in
             make.top.equalTo(titleTextField.snp.bottom).offset(20)
             make.leadingMargin.equalTo(20)
             make.trailingMargin.equalTo(-20)
@@ -82,15 +74,10 @@ class DiaryView: BaseView {
         }
         
         contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(dataTextField.snp.bottom).offset(20)
+            make.top.equalTo(dateTextField.snp.bottom).offset(20)
             make.leadingMargin.equalTo(20)
             make.trailingMargin.equalTo(-20)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
-        }
-        
-        writeButton.snp.makeConstraints { make in
-            make.top.equalTo(photoImageView.snp.top)
-            make.trailing.equalTo(photoImageView.snp.trailing)
         }
         
     }

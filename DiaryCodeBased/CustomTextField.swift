@@ -17,19 +17,16 @@ class CustomTextField: UITextField {
         super.init(coder: coder)
     }
     
-    override func layoutSubviews() {
+    convenience init(palceHolder: String) {
+        self.init()
+        self.attributedPlaceholder = NSAttributedString(string: palceHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray2])
         backgroundColor = .clear
         textAlignment = .center
         borderStyle = .none
         layer.cornerRadius = 8
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
-        textColor = .red
-    }
-    
-    convenience init(palceHolder: String) {
-        self.init()
-        self.attributedPlaceholder = NSAttributedString(string: palceHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray2])
+        textColor = .black
     }
 
 }
