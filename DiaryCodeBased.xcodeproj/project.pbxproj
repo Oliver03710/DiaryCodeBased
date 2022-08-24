@@ -43,6 +43,9 @@
 		AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567328B52D1F00454132 /* HomeTableViewCell.swift */; };
 		AD89567628B52EF100454132 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567528B52EF100454132 /* CustomLabel.swift */; };
 		AD89567828B5346E00454132 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567728B5346E00454132 /* Date+Extension.swift */; };
+		ADDEFF1B28B671B700F28035 /* BackupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1A28B671B700F28035 /* BackupTableViewCell.swift */; };
+		ADDEFF1D28B6721000F28035 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1C28B6721000F28035 /* CustomTableViewCell.swift */; };
+		ADDEFF2028B6734100F28035 /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1F28B6734100F28035 /* BackupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		AD89567328B52D1F00454132 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		AD89567528B52EF100454132 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		AD89567728B5346E00454132 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		ADDEFF1A28B671B700F28035 /* BackupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupTableViewCell.swift; sourceTree = "<group>"; };
+		ADDEFF1C28B6721000F28035 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		ADDEFF1F28B6734100F28035 /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +168,7 @@
 				AD5299A428B319D700761A3A /* Realm */,
 				AD3BFA4428B2000800381E8E /* Networking */,
 				AD4284B628B1548000EC36E4 /* Utility */,
+				ADDEFF1E28B6731F00F28035 /* Backup */,
 				AD5299A728B32AA000761A3A /* Home */,
 				AD091B9728B5A84800DAFCDE /* Diary */,
 				AD091B9828B5A86000DAFCDE /* GetImages */,
@@ -191,6 +198,7 @@
 				AD3BFA3F28B1F8C200381E8E /* CustomImageView.swift */,
 				AD3BFA4128B1FA5800381E8E /* CustomTextView.swift */,
 				AD89567528B52EF100454132 /* CustomLabel.swift */,
+				ADDEFF1C28B6721000F28035 /* CustomTableViewCell.swift */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -221,6 +229,15 @@
 				AD89567328B52D1F00454132 /* HomeTableViewCell.swift */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		ADDEFF1E28B6731F00F28035 /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				ADDEFF1F28B6734100F28035 /* BackupViewController.swift */,
+				ADDEFF1A28B671B700F28035 /* BackupTableViewCell.swift */,
+			);
+			name = Backup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +329,7 @@
 			files = (
 				AD3BFA6028B234D100381E8E /* ImageData.swift in Sources */,
 				AD89567628B52EF100454132 /* CustomLabel.swift in Sources */,
+				ADDEFF1B28B671B700F28035 /* BackupTableViewCell.swift in Sources */,
 				AD5299A628B319E800761A3A /* RealmModel.swift in Sources */,
 				AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */,
 				AD3BFA4028B1F8C200381E8E /* CustomImageView.swift in Sources */,
@@ -319,8 +337,10 @@
 				AD4284A728B1543600EC36E4 /* MainDiaryController.swift in Sources */,
 				AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */,
 				AD4284B928B154AE00EC36E4 /* BaseViewController.swift in Sources */,
+				ADDEFF1D28B6721000F28035 /* CustomTableViewCell.swift in Sources */,
 				AD52298628B4E32400811043 /* UIViewController+Extension.swift in Sources */,
 				AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */,
+				ADDEFF2028B6734100F28035 /* BackupViewController.swift in Sources */,
 				AD4284BD28B1556400EC36E4 /* DiaryView.swift in Sources */,
 				AD3BFA5728B2191300381E8E /* ImagesCollectionViewCell.swift in Sources */,
 				AD3BFA4228B1FA5800381E8E /* CustomTextView.swift in Sources */,

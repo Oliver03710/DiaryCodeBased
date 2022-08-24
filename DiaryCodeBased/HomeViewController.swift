@@ -62,6 +62,11 @@ class HomeViewController: BaseViewController {
         transitionViewController(vc, transitionStyle: .presentFullNavigation)
     }
     
+    @objc func backupButtonClicked() {
+        let vc = BackupViewController()
+        transitionViewController(vc, transitionStyle: .presentFullNavigation)
+    }
+    
     
     // MARK: - Helper Functions
     
@@ -79,9 +84,11 @@ class HomeViewController: BaseViewController {
     func setNaviBarButtons() {
         let filterButton = UIBarButtonItem(title: "filter", style: .plain, target: self, action: #selector(filterButtonClicked))
         let sortButton = UIBarButtonItem(title: "sort", style: .plain, target: self, action: #selector(sortButtonClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonClicked))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonClicked))
+        let backupButton = UIBarButtonItem(image: UIImage(systemName: "tray.and.arrow.down.fill"), style: .plain, target: self, action: #selector(backupButtonClicked))
         
         navigationItem.leftBarButtonItems = [sortButton, filterButton]
+        navigationItem.rightBarButtonItems = [addButton, backupButton]
     }
     
 }
