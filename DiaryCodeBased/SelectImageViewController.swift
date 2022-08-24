@@ -39,21 +39,25 @@ class SelectImageViewController: BaseViewController {
         guard let image = selectView.selectedImage else {
             delegate?.transferringPHPickerImage(image: selectView.phPickerImageView.image)
             selectView.phPickerImageView.isHidden = true
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true)
             selectView.phPickerImageView.image = nil
             return
         }
             delegate?.transferringImage(image: image)
             print(image)
         
-        self.navigationController?.popViewController(animated: true)
         ImageData.imageData.removeAll()
+        self.dismiss(animated: true)
     }
     
     @objc func goPhotoLibrary() {
         selectView.collectionView.isHidden = true
         ImageData.imageData.removeAll()
         present(selectView.phPicker, animated: true)
+    }
+    
+    @objc func cancelButtonClicked() {
+        dismiss(animated: true)
     }
     
     
@@ -68,6 +72,7 @@ class SelectImageViewController: BaseViewController {
         let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(selectImages))
         let phPicker = UIBarButtonItem(title: "사진첩", style: .plain, target: self, action: #selector(goPhotoLibrary))
         self.navigationItem.rightBarButtonItems = [selectButton, phPicker]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(cancelButtonClicked))
     }
 
 }

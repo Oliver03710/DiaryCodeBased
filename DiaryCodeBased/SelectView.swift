@@ -19,6 +19,7 @@ class SelectView: BaseView {
     var selectedImage: UIImage?
     var itemPrividers: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
+    var selectIndexPath: IndexPath?
     
     lazy var phPicker: PHPickerViewController = {
         var configuration = PHPickerConfiguration()
@@ -127,9 +128,12 @@ extension SelectView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
-        cell.layer.borderWidth = 3
-        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+//        cell.layer.borderWidth = 3
+//        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+        
         selectedImage = cell.imageView.image
+        selectIndexPath = indexPath
+        collectionView.reloadData()
         
     }
 
@@ -138,6 +142,10 @@ extension SelectView: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ImagesCollectionViewCell else { return }
         cell.layer.borderWidth = 0
         cell.layer.borderColor = nil
+        collectionView.deselectItem(at: indexPath, animated: true)
+        selectedImage = nil
+        selectIndexPath = nil
+        collectionView.reloadData()
         
     }
     
@@ -170,6 +178,8 @@ extension SelectView: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagesCollectionViewCell.reuseIdentifier, for: indexPath) as? ImagesCollectionViewCell else { return UICollectionViewCell() }
         
+        cell.layer.borderWidth = selectIndexPath == indexPath ? 4 : 0
+        cell.layer.borderColor = selectIndexPath == indexPath ? #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1) : nil
         cell.imageView.kf.setImage(with: URL(string: ImageData.imageData[indexPath.item]))
 
         return cell

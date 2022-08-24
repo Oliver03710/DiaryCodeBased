@@ -57,6 +57,11 @@ class HomeViewController: BaseViewController {
         tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: "registerDate", ascending: true)
     }
     
+    @objc func plusButtonClicked() {
+        let vc = MainDiaryController()
+        transitionViewController(vc, transitionStyle: .presentFullNavigation)
+    }
+    
     
     // MARK: - Helper Functions
     
@@ -74,8 +79,9 @@ class HomeViewController: BaseViewController {
     func setNaviBarButtons() {
         let filterButton = UIBarButtonItem(title: "filter", style: .plain, target: self, action: #selector(filterButtonClicked))
         let sortButton = UIBarButtonItem(title: "sort", style: .plain, target: self, action: #selector(sortButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(plusButtonClicked))
         
-        navigationItem.rightBarButtonItems = [sortButton, filterButton]
+        navigationItem.leftBarButtonItems = [sortButton, filterButton]
     }
     
 }
@@ -93,9 +99,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         
-//        guard let image = tasks[indexPath.row].photos?.toImage() else { return UITableViewCell() }
-        
-//        cell.sampleImageView.image = image
+        cell.sampleImageView.image = loadImageFromDocument(fileName: "\(tasks[indexPath.row].objectId).jpg")
         cell.titleLabel.text = tasks[indexPath.row].diaryTitle
         cell.dateLabel.text = tasks[indexPath.row].registerDate.toString()
         cell.sampleContentLabel.text = tasks[indexPath.row].contents
@@ -144,6 +148,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             try! self.localRealm.write {
                 self.localRealm.delete(self.tasks[indexPath.row])
             }
+            self.removeImageFromDocument(fileName: "\(self.tasks[indexPath.row].objectId).jpg")
             print("favourtie Button Clicked")
             self.fetchRealm()
         }

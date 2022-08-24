@@ -14,7 +14,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .current
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")
-        dateFormatter.calendar = Calendar(identifier: .persian)
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
         dateFormatter.dateFormat = format
         let str = dateFormatter.string(from: self)
         
