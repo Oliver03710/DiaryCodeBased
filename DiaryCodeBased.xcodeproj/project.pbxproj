@@ -39,10 +39,16 @@
 		AD5299A328B3164300761A3A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AD5299A228B3164300761A3A /* RealmSwift */; };
 		AD5299A628B319E800761A3A /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A528B319E800761A3A /* RealmModel.swift */; };
 		AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5299A828B32AB500761A3A /* HomeViewController.swift */; };
+		AD6A1A7E28B8C01A005C63FD /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A1A7D28B8C01A005C63FD /* MainTabViewController.swift */; };
+		AD6A1A8128B8C107005C63FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A1A8028B8C107005C63FD /* SettingsViewController.swift */; };
+		AD6A1A8428B8C19D005C63FD /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A1A8328B8C19D005C63FD /* CalendarViewController.swift */; };
 		AD89567028B527AA00454132 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89566F28B527AA00454132 /* String+Extension.swift */; };
 		AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567328B52D1F00454132 /* HomeTableViewCell.swift */; };
 		AD89567628B52EF100454132 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567528B52EF100454132 /* CustomLabel.swift */; };
 		AD89567828B5346E00454132 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD89567728B5346E00454132 /* Date+Extension.swift */; };
+		AD95765E28B85596008F9AD9 /* UserDiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD95765D28B85596008F9AD9 /* UserDiaryRepository.swift */; };
+		AD95766128B86156008F9AD9 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = AD95766028B86156008F9AD9 /* FSCalendar */; };
+		ADBBB8A228B701650063BC99 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = ADBBB8A128B701650063BC99 /* Zip */; };
 		ADDEFF1B28B671B700F28035 /* BackupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1A28B671B700F28035 /* BackupTableViewCell.swift */; };
 		ADDEFF1D28B6721000F28035 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1C28B6721000F28035 /* CustomTableViewCell.swift */; };
 		ADDEFF2028B6734100F28035 /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADDEFF1F28B6734100F28035 /* BackupViewController.swift */; };
@@ -77,10 +83,14 @@
 		AD52298528B4E32400811043 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		AD5299A528B319E800761A3A /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		AD5299A828B32AB500761A3A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AD6A1A7D28B8C01A005C63FD /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		AD6A1A8028B8C107005C63FD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		AD6A1A8328B8C19D005C63FD /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		AD89566F28B527AA00454132 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		AD89567328B52D1F00454132 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		AD89567528B52EF100454132 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		AD89567728B5346E00454132 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		AD95765D28B85596008F9AD9 /* UserDiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiaryRepository.swift; sourceTree = "<group>"; };
 		ADDEFF1A28B671B700F28035 /* BackupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupTableViewCell.swift; sourceTree = "<group>"; };
 		ADDEFF1C28B6721000F28035 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		ADDEFF1F28B6734100F28035 /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
@@ -91,10 +101,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADBBB8A228B701650063BC99 /* Zip in Frameworks */,
 				AD5299A328B3164300761A3A /* RealmSwift in Frameworks */,
 				AD3BFA6D28B235DF00381E8E /* Kingfisher in Frameworks */,
 				AD3BFA6A28B235CE00381E8E /* SwiftyJSON in Frameworks */,
 				AD4284C028B155FE00EC36E4 /* SnapKit in Frameworks */,
+				AD95766128B86156008F9AD9 /* FSCalendar in Frameworks */,
 				AD3BFA6728B235C200381E8E /* Alamofire in Frameworks */,
 				AD5299A128B3164300761A3A /* Realm in Frameworks */,
 			);
@@ -168,10 +180,13 @@
 				AD5299A428B319D700761A3A /* Realm */,
 				AD3BFA4428B2000800381E8E /* Networking */,
 				AD4284B628B1548000EC36E4 /* Utility */,
-				ADDEFF1E28B6731F00F28035 /* Backup */,
+				AD6A1A7C28B8BFF8005C63FD /* TabBar */,
 				AD5299A728B32AA000761A3A /* Home */,
+				ADDEFF1E28B6731F00F28035 /* Backup */,
+				AD6A1A8228B8C180005C63FD /* Calendar */,
 				AD091B9728B5A84800DAFCDE /* Diary */,
 				AD091B9828B5A86000DAFCDE /* GetImages */,
+				AD6A1A7F28B8C0E0005C63FD /* Settings */,
 				AD4284A828B1543600EC36E4 /* Main.storyboard */,
 				AD4284AB28B1543600EC36E4 /* Assets.xcassets */,
 				AD4284AD28B1543600EC36E4 /* LaunchScreen.storyboard */,
@@ -218,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				AD5299A528B319E800761A3A /* RealmModel.swift */,
+				AD95765D28B85596008F9AD9 /* UserDiaryRepository.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -229,6 +245,30 @@
 				AD89567328B52D1F00454132 /* HomeTableViewCell.swift */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		AD6A1A7C28B8BFF8005C63FD /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				AD6A1A7D28B8C01A005C63FD /* MainTabViewController.swift */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		AD6A1A7F28B8C0E0005C63FD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AD6A1A8028B8C107005C63FD /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		AD6A1A8228B8C180005C63FD /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				AD6A1A8328B8C19D005C63FD /* CalendarViewController.swift */,
+			);
+			name = Calendar;
 			sourceTree = "<group>";
 		};
 		ADDEFF1E28B6731F00F28035 /* Backup */ = {
@@ -263,6 +303,8 @@
 				AD3BFA6C28B235DF00381E8E /* Kingfisher */,
 				AD5299A028B3164300761A3A /* Realm */,
 				AD5299A228B3164300761A3A /* RealmSwift */,
+				ADBBB8A128B701650063BC99 /* Zip */,
+				AD95766028B86156008F9AD9 /* FSCalendar */,
 			);
 			productName = DiaryCodeBased;
 			productReference = AD42849F28B1543600EC36E4 /* DiaryCodeBased.app */;
@@ -298,6 +340,8 @@
 				AD3BFA6828B235CE00381E8E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				AD3BFA6B28B235DF00381E8E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */,
+				ADBBB8A028B701650063BC99 /* XCRemoteSwiftPackageReference "Zip" */,
+				AD95765F28B86156008F9AD9 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = AD4284A028B1543600EC36E4 /* Products */;
 			projectDirPath = "";
@@ -330,13 +374,16 @@
 				AD3BFA6028B234D100381E8E /* ImageData.swift in Sources */,
 				AD89567628B52EF100454132 /* CustomLabel.swift in Sources */,
 				ADDEFF1B28B671B700F28035 /* BackupTableViewCell.swift in Sources */,
+				AD6A1A8428B8C19D005C63FD /* CalendarViewController.swift in Sources */,
 				AD5299A628B319E800761A3A /* RealmModel.swift in Sources */,
 				AD4284C328B156C800EC36E4 /* CustomTextField.swift in Sources */,
 				AD3BFA4028B1F8C200381E8E /* CustomImageView.swift in Sources */,
 				AD3BFA3E28B1F83B00381E8E /* CustomView.swift in Sources */,
+				AD6A1A8128B8C107005C63FD /* SettingsViewController.swift in Sources */,
 				AD4284A728B1543600EC36E4 /* MainDiaryController.swift in Sources */,
 				AD89567428B52D1F00454132 /* HomeTableViewCell.swift in Sources */,
 				AD4284B928B154AE00EC36E4 /* BaseViewController.swift in Sources */,
+				AD6A1A7E28B8C01A005C63FD /* MainTabViewController.swift in Sources */,
 				ADDEFF1D28B6721000F28035 /* CustomTableViewCell.swift in Sources */,
 				AD52298628B4E32400811043 /* UIViewController+Extension.swift in Sources */,
 				AD5299A928B32AB500761A3A /* HomeViewController.swift in Sources */,
@@ -349,6 +396,7 @@
 				AD3BFA4A28B200DE00381E8E /* SelectView.swift in Sources */,
 				AD4284BB28B154E800EC36E4 /* BaseView.swift in Sources */,
 				AD3BFA4828B200BA00381E8E /* SelectImageViewController.swift in Sources */,
+				AD95765E28B85596008F9AD9 /* UserDiaryRepository.swift in Sources */,
 				AD4284A328B1543600EC36E4 /* AppDelegate.swift in Sources */,
 				AD3BFA6428B234F800381E8E /* APIKey.swift in Sources */,
 				AD3BFA5B28B2199D00381E8E /* ReusableProtocols.swift in Sources */,
@@ -617,6 +665,22 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		AD95765F28B86156008F9AD9 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		ADBBB8A028B701650063BC99 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -649,6 +713,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD52999F28B3164300761A3A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		AD95766028B86156008F9AD9 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD95765F28B86156008F9AD9 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		ADBBB8A128B701650063BC99 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADBBB8A028B701650063BC99 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

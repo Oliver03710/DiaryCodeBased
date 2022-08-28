@@ -8,16 +8,12 @@
 import UIKit
 import RealmSwift
 
-protocol SendImageDelegate {
-    func sendImage(image: UIImage)
-}
-
 class MainDiaryController: BaseViewController {
 
     // MARK: - Properties
     
     var diaryView = DiaryView()
-    let localRealm = try! Realm()   // Realm 테이블에 데이터를 CRUD할 때, Realm 테이블 경로에 접근
+    let repository = UserDiaryRepository()   // Realm 테이블에 데이터를 CRUD할 때, Realm 테이블 경로에 접근
     
     
     // MARK: - Init
@@ -29,7 +25,7 @@ class MainDiaryController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        print("Realm is located at:", localRealm.configuration.fileURL!)
+        print("Realm is located at:", repository.localRealm.configuration.fileURL!)
     }
     
     override func configureUI() {
@@ -53,16 +49,10 @@ class MainDiaryController: BaseViewController {
         // Record 추가
         guard let titleText = diaryView.titleTextField.text else { return }
         guard let contentText = diaryView.contentTextView.text else { return }
-//        guard let dateText = diaryView.dateTextField.text?.toDate() else { return }
+
         let task = UserDiary(diaryTitle: titleText, contents: contentText, writingDate: Date(), registerDate: Date(), photos: nil)
         
-        do {
-            try localRealm.write {
-                localRealm.add(task)
-            }
-        } catch let error {
-            print(error)
-        }
+        repository.addItem(item: task)
         
         if let image = diaryView.photoImageView.image {
             saveImageToDocument(fileName: "\(task.objectId).jpg", image: image)
@@ -72,10 +62,6 @@ class MainDiaryController: BaseViewController {
     }
     
     @objc func cancelButtonClicked() {
-//        diaryView.photoImageView.image = nil
-//        diaryView.titleTextField.text = nil
-//        diaryView.dateTextField.text = nil
-//        diaryView.contentTextView.text = nil
         dismiss(animated: true)
     }
     
@@ -106,16 +92,6 @@ extension MainDiaryController: TransferImageDelegate {
     }
     
     func transferringImage(image: UIImage) {
-        diaryView.photoImageView.image = image
-    }
-    
-}
-
-// MARK: - Extension: SendImageDelegate
-
-extension MainDiaryController: SendImageDelegate {
-    
-    func sendImage(image: UIImage) {
         diaryView.photoImageView.image = image
     }
     

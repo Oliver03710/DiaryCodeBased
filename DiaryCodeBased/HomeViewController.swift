@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RealmSwift   // 1. import
+import FSCalendar
 
 class HomeViewController: BaseViewController {
     
@@ -22,7 +23,8 @@ class HomeViewController: BaseViewController {
         return tv
     }()
     
-    let localRealm = try! Realm()   // 2. Realm()
+    let repository = UserDiaryRepository() // 2. Realm()
+    
     var tasks: Results<UserDiary>! {
         didSet {
             tableView.reloadData()
@@ -49,12 +51,11 @@ class HomeViewController: BaseViewController {
     
     // Realm filter qeury, NSPredicate
     @objc func filterButtonClicked() {
-        tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: "registerDate", ascending: true).filter("diaryTitle CONTAINS[c] 'a'")
-//            .filter("diaryTitle = '오늘의 일기993'")
+        tasks = repository.fetchFilter()    // .filter("diaryTitle = '오늘의 일기993'")
     }
     
     @objc func sortButtonClicked() {
-        tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: "registerDate", ascending: true)
+        tasks = repository.fetchSort("registeredDate")
     }
     
     @objc func plusButtonClicked() {
@@ -71,14 +72,17 @@ class HomeViewController: BaseViewController {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide) }
+        [tableView].forEach { view.addSubview($0) }
+        tableView.snp.makeConstraints { make in
+            make.top.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         setNaviBarButtons()
     }
     
     func fetchRealm() {
         // 3. Realm 데이터를 정렬해 tasks 에 담기
-        tasks = localRealm.objects(UserDiary.self).sorted(byKeyPath: "writingDate", ascending: false)
+        tasks = repository.fetch()
     }
     
     func setNaviBarButtons() {
@@ -123,24 +127,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let favourite = UIContextualAction(style: .normal, title: "즐겨찾기") { action, view, completionHandler in
             
-            // Realm data update
-            try! self.localRealm.write {
-                // 하나의 레코드에서 특정 컬럼 하나만 변경
-//                self.tasks[indexPath.row].favourite = !self.tasks[indexPath.row].favourite
-                
-                // 하나의 테이블에 특정 컬럼 전체를 변경
-//                self.tasks.setValue(true, forKey: "favourite")
-                
-                // 하나의 레코드에서 여러 컬럼들이 변경
-//                self.localRealm.create(UserDiary.self, value: ["objectId": self.tasks[indexPath.row].objectId, "contents": "변경 테스트", "diaryTitle": "제목 변경"], update: .modified)
-                
-                print("Realm Update Succeed, reloadRows 필요")
-            }
-            
-            // 1. 스와이프한 셀 하나만 ReloadRows 코드 구현 -> 상대적 효율성
-            // 2. 데이터가 변경되었으니 다시 Realm에서 데이터 가지고 오기 -> didSet으로 일관적 형태로 갱신
+            // Realm Data Update
+            self.repository.updateFavourite(item: self.tasks[indexPath.row])
             self.fetchRealm()
-           
+            
         }
         let image = tasks[indexPath.row].favourite ? "star.fill" : "star"
         favourite.image = UIImage(systemName: image)
@@ -151,16 +141,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let favourite = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
-            try! self.localRealm.write {
-                self.localRealm.delete(self.tasks[indexPath.row])
-            }
-            self.removeImageFromDocument(fileName: "\(self.tasks[indexPath.row].objectId).jpg")
-            print("favourtie Button Clicked")
+        
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
+            
+            self.repository.deleteItem(item: self.tasks[indexPath.row])
             self.fetchRealm()
+            print("favourite Button Clicked")
+            
         }
         
-        return UISwipeActionsConfiguration(actions: [favourite])
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
 }
