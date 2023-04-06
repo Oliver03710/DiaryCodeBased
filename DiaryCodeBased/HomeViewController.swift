@@ -23,6 +23,13 @@ class HomeViewController: BaseViewController {
         return tv
     }()
     
+    lazy var searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.placeholder = "다이어리 검색하세요"
+        sb.delegate = self
+        return sb
+    }()
+    
     let repository = UserDiaryRepository() // 2. Realm()
     
     var tasks: Results<UserDiary>! {
@@ -31,6 +38,9 @@ class HomeViewController: BaseViewController {
             print("Tasks Changed")
         }
     }
+    
+    var filteredData: [UserDiary]?
+    
     
     // MARK: - Init
     
@@ -72,12 +82,22 @@ class HomeViewController: BaseViewController {
     // MARK: - Helper Functions
     
     override func configureUI() {
-        [tableView].forEach { view.addSubview($0) }
-        tableView.snp.makeConstraints { make in
-            make.top.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
-        }
+        [searchBar, tableView].forEach { view.addSubview($0) }
         
         setNaviBarButtons()
+    }
+    
+    override func setConstraints() {
+        
+        searchBar.snp.makeConstraints { make in
+            make.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(44)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(searchBar.snp.bottom)
+        }
     }
     
     func fetchRealm() {
@@ -103,6 +123,13 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let text = searchBar.text, let data = filteredData {
+            if !text.isEmpty {
+                return data.count
+            }
+        }
+        
         return tasks.count
     }
     
@@ -110,10 +137,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         
-        cell.sampleImageView.image = loadImageFromDocument(fileName: "\(tasks[indexPath.row].objectId).jpg")
-        cell.titleLabel.text = tasks[indexPath.row].diaryTitle
-        cell.dateLabel.text = tasks[indexPath.row].registerDate.toString()
-        cell.sampleContentLabel.text = tasks[indexPath.row].contents
+        if let text = searchBar.text, let data = filteredData {
+            if !text.isEmpty {
+                
+            }
+        } else {
+            cell.sampleImageView.image = loadImageFromDocument(fileName: "\(tasks[indexPath.row].objectId).jpg")
+            cell.titleLabel.text = tasks[indexPath.row].diaryTitle
+            cell.dateLabel.text = tasks[indexPath.row].registerDate.toString()
+            cell.sampleContentLabel.text = tasks[indexPath.row].contents
+        }
         
         return cell
     }
@@ -143,7 +176,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
-            
+          
             self.repository.deleteItem(item: self.tasks[indexPath.row])
             self.fetchRealm()
             print("favourite Button Clicked")
@@ -151,6 +184,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+}
+
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = searchBar.text else { return }
+        if !text.isEmpty, text.count > 0 {
+            let result = tasks.where {
+                $0.diaryTitle.contains(text) || $0.contents.contains(text)
+            }
+            filteredData?.append(contentsOf: result)
+            tableView.reloadData()
+        }
     }
     
 }

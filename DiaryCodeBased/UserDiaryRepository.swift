@@ -8,6 +8,7 @@
 import Foundation
 
 import RealmSwift
+import UIKit
 
 protocol UserDiaryRepositoryType {
     func fetch() -> Results<UserDiary>
@@ -16,21 +17,48 @@ protocol UserDiaryRepositoryType {
     func fetchDate(date: Date) -> Results<UserDiary>
     func updateFavourite(item: UserDiary)
     func deleteItem(item: UserDiary)
-    func addItem(item: UserDiary)
+    func addItem(item: UserDiary, objectId: ObjectId, image: UIImage)
 }
 
 // Realm이 복잡해지면 Extension UserDiaryRepository 등을 활용하여 기능 더 분리 가능
 class UserDiaryRepository: UserDiaryRepositoryType {
-    
+
     let localRealm = try! Realm()
     
-    func addItem(item: UserDiary) {
+    func addItem(item: UserDiary, objectId: ObjectId, image: UIImage) {
         
         do {
             try localRealm.write { localRealm.add(item) }
         } catch let error { print(error) }
+        saveDataToNewFolder(fileName: "\(objectId).jpg", image: image)
         
     }
+    
+    func saveDataToNewFolder(fileName: String, image: UIImage) {
+        
+        let folderName = "images"
+        let fileManager = FileManager.default
+        let documentsFolder = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let folderURL = documentsFolder.appendingPathComponent(folderName)
+        let folderExists = (try? folderURL.checkResourceIsReachable()) ?? false
+        
+        do {
+            if !folderExists {
+                try fileManager.createDirectory(at: folderURL, withIntermediateDirectories: false)
+            }
+            let fileURL = folderURL.appendingPathComponent(fileName)
+            guard let data = image.jpegData(compressionQuality: 0.8) else { return }
+            
+            do {
+                try data.write(to: fileURL)
+            } catch {
+                print(error)
+            }
+
+        } catch { print(error) }
+        
+    }
+
     
     func fetchDate(date: Date) -> Results<UserDiary> {
         return localRealm.objects(UserDiary.self).filter("writingDate >= %@ AND writingDate < %@", date, Date(timeInterval: 86400, since: date))     // NSPredicate
@@ -85,10 +113,10 @@ class UserDiaryRepository: UserDiaryRepositoryType {
     
     func deleteItem(item: UserDiary) {
         
+        removeImageFromDocument(fileName: "\(item.objectId).jpg")
         do {
             try localRealm.write { localRealm.delete(item) }
         } catch let error { print(error) }
-        removeImageFromDocument(fileName: "\(item.objectId).jpg")
         
     }
     

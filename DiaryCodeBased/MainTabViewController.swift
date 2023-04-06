@@ -21,15 +21,17 @@ class MainTabViewController: UITabBarController {
     // MARK: - Helper Functions
     
     func configureVCs() {
-        let homeVC = UINavigationController(rootViewController: HomeViewController())
-        let calVC = UINavigationController(rootViewController: CalendarViewController())
-        let settingVC = UINavigationController(rootViewController: SettingsViewController())
+        let homeVC = HomeViewController()
+        let calVC = CalendarViewController()
+        let settingVC = SettingsViewController()
+        
+        let viewControllers = [homeVC, calVC,  settingVC].map { UINavigationController(rootViewController: $0) }
         
         homeVC.title = "일기목록"
         calVC.title = "달력"
         settingVC.title = "설정"
         
-        self.setViewControllers([homeVC, calVC, settingVC], animated: true)
+        self.setViewControllers(viewControllers, animated: true)
         
         guard let items = self.tabBar.items else { return }
         

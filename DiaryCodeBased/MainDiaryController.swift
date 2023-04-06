@@ -49,14 +49,11 @@ class MainDiaryController: BaseViewController {
         // Record 추가
         guard let titleText = diaryView.titleTextField.text else { return }
         guard let contentText = diaryView.contentTextView.text else { return }
-
+        guard let image = diaryView.photoImageView.image else { return }
+        
         let task = UserDiary(diaryTitle: titleText, contents: contentText, writingDate: Date(), registerDate: Date(), photos: nil)
         
-        repository.addItem(item: task)
-        
-        if let image = diaryView.photoImageView.image {
-            saveImageToDocument(fileName: "\(task.objectId).jpg", image: image)
-        }
+        repository.addItem(item: task, objectId: task.objectId, image: image)
         
         dismiss(animated: true)
     }

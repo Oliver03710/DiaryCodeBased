@@ -50,6 +50,7 @@ class CalendarViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = .systemGreen
         [calendar].forEach{ view.addSubview($0) }
+        showNaviBars(naviTitle: "달력", naviBarTintColor: .systemBackground)
     }
     
     override func setConstraints() {
@@ -57,6 +58,7 @@ class CalendarViewController: BaseViewController {
             make.leading.top.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
 }
 
 

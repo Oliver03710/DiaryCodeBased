@@ -27,6 +27,8 @@ class BackupViewController: BaseViewController {
         view.backgroundColor = .systemBackground
     }
     
+    var fileName: String?
+    
     
     // MARK: - Selectors
     
@@ -45,20 +47,27 @@ class BackupViewController: BaseViewController {
         }
         
         let realmFile = path.appendingPathComponent("default.realm")
+        let imageFolder = path.appendingPathComponent("images")
         
-        
-        guard FileManager.default.fileExists(atPath: realmFile.path) else {
+        guard FileManager.default.fileExists(atPath: realmFile.path) || FileManager.default.fileExists(atPath: imageFolder.path) else {
             showAlertMessage(title: "백업할 파일이 없습니다.")
             return
         }
         
         urlPaths.append(URL(string: realmFile.path)!)
+        urlPaths.append(URL(string: imageFolder.path)!)
         
         // 백업 파일을 압축: URL
         
         do {
-            let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "DiaryCodeBased_1")
-            print("Archive Location: \(zipFilePath)")
+            let fileNameDate = Date().toString(withFormat: "yyMMdd_HH:mm")
+            fileName = fileNameDate
+            guard let name = fileName else {
+                showAlertMessage(title: "도큐먼트 위치에 오류가 있습니다.")
+                return
+            }
+            let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "BackUpDiary_\(name)")
+                print("Archive Location: \(zipFilePath)")
             
             // Activity View Controller
             showActivityViewController()
@@ -66,7 +75,7 @@ class BackupViewController: BaseViewController {
         } catch {
             showAlertMessage(title: "압축에 실패했습니다.")
         }
-        
+        tableView.reloadData()
     }
     
     @objc func restoreButtonClicked() {
@@ -84,14 +93,13 @@ class BackupViewController: BaseViewController {
     override func configureUI() {
         setNaviBarButtons()
         configureTableView()
-        fetchDocumentZipFile()
+        
     }
     
     func configureTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide) }
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = 50
     }
     
     func setNaviBarButtons() {
@@ -111,7 +119,11 @@ class BackupViewController: BaseViewController {
             return
         }
         
-        let backupFileURL = path.appendingPathComponent("DiaryCodeBased_1.zip")
+        guard let name = fileName else {
+            showAlertMessage(title: "도큐먼트 위치에 오류가 있습니다.")
+            return
+        }
+        let backupFileURL = path.appendingPathComponent("BackUpDiary_\(name).zip")
         
         let vc = UIActivityViewController(activityItems: [backupFileURL], applicationActivities: [])
         self.present(vc, animated: true)
@@ -125,6 +137,10 @@ class BackupViewController: BaseViewController {
 
 extension BackupViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        restoreFromCell(urls: fetchDocumentZipFile().0?[indexPath.row], indexPath: indexPath)
+    }
+    
 }
 
 
@@ -133,11 +149,14 @@ extension BackupViewController: UITableViewDelegate {
 extension BackupViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        guard let arr = fetchDocumentZipFile().1 else { return 0}
+        return arr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BackupTableViewCell.reuseIdentifier, for: indexPath) as? BackupTableViewCell else { return UITableViewCell() }
+        
+        cell.backupLabel.text = fetchDocumentZipFile().1?[indexPath.row]
         
         return cell
     }

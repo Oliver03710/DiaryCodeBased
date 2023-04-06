@@ -20,5 +20,6 @@ class SettingsViewController: BaseViewController {
     
     override func configureUI() {
         view.backgroundColor = .orange
+        showNaviBars(naviTitle: "설정", naviBarTintColor: .systemBackground)
     }
 }

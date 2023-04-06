@@ -7,11 +7,16 @@
 
 import UIKit
 
+import SnapKit
+
 class BackupTableViewCell: CustomTableViewCell {
 
     // MARK: - Properties
     
-    
+    let backupLabel: CustomLabel = {
+        let label = CustomLabel(fontSize: 15, textAlignment: .center)
+        return label
+    }()
     
     // MARK: - Init
     
@@ -27,11 +32,13 @@ class BackupTableViewCell: CustomTableViewCell {
     // MARK: - Helper Functions
     
     override func setUI() {
-        
+        [backupLabel].forEach { self.addSubview($0) }
     }
     
     override func setConstraints() {
-        
+        backupLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(self)
+        }
     }
 
 }
